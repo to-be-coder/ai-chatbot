@@ -2,7 +2,8 @@
 // All packages except `@mantine/hooks` require styles imports
 import "@mantine/core/styles.css";
 
-import { ColorSchemeScript, MantineProvider } from "@mantine/core";
+import MantineLayout from "@/components/MantineLayout";
+import { ColorSchemeScript } from "@mantine/core";
 
 export const metadata = {
   title: "My AI app",
@@ -20,7 +21,7 @@ export default function RootLayout({
         <ColorSchemeScript />
       </head>
       <body>
-        <MantineProvider>{children}</MantineProvider>
+        <MantineLayout>{children}</MantineLayout>
       </body>
     </html>
   );

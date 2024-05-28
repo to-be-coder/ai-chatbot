@@ -1,8 +1,10 @@
-/** @type {import('postcss-load-config').Config} */
-const config = {
-  plugins: {
-    tailwindcss: {},
-  },
-};
+//This is for Tailwind. Uncomment this when I am ready to switch from Mantine to Tailwind
 
-export default config;
+// /** @type {import('postcss-load-config').Config} */
+// const config = {
+//   plugins: {
+//     tailwindcss: {},
+//   },
+// };
+
+// export default config;

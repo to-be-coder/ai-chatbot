@@ -27,9 +27,12 @@ const createPineconeIndex = async () => {
   } catch (error) {
     console.error("Error creating index:", error);
   }
-
-  const chatBotIndex = pinecone.index(indexName);
-  return chatBotIndex;
 };
 
-export default createPineconeIndex;
+(async () => {
+  await createPineconeIndex();
+})();
+
+const chatBotIndex = pinecone.index(indexName);
+
+export default chatBotIndex;

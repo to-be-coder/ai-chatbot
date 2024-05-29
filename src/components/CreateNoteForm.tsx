@@ -1,16 +1,13 @@
-import { Box, Button, Container } from "@mantine/core";
+"use client";
+
+import { Box, Button, Container, TextInput } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
 import { useMutation } from "@tanstack/react-query";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { api } from "../../lib/frontend/api";
 import { createNoteSchema } from "../../lib/validation/note";
 
-interface AddNoteDialogProps {
-  open: boolean;
-  setOpen: (open: boolean) => void;
-}
-
-const AddNoteDialog = ({ open, setOpen }: AddNoteDialogProps) => {
+const CreateNoteForm = () => {
   const verifySchema = createNoteSchema;
   const validate = zodResolver(verifySchema);
 
@@ -27,21 +24,18 @@ const AddNoteDialog = ({ open, setOpen }: AddNoteDialogProps) => {
 
   const router = useRouter();
 
-  const createProjectUpdateMutation = useMutation({
-    mutationKey: ["create-project-update"],
+  const createNoteMutation = useMutation({
+    mutationKey: ["create-note"],
     mutationFn: (data) => {
       return api
-        .post("/api/project-updates", data)
+        .post("/api/notes", data)
         .then((response: any) => response.data);
     },
   });
 
   const handleSubmit = async (data: any) => {
-    const { ok, result, error } = await createProjectUpdateMutation.mutateAsync(
-      data
-    );
+    const { ok, result, error } = await createNoteMutation.mutateAsync(data);
     if (ok) {
-      router.reload();
     } else {
       alert(error);
     }
@@ -50,11 +44,21 @@ const AddNoteDialog = ({ open, setOpen }: AddNoteDialogProps) => {
   return (
     <Box component="form" onSubmit={form.onSubmit(handleSubmit)}>
       <Container size="xl">
-        <Button
-          type="submit"
-          size="md"
-          loading={createProjectUpdateMutation.isPending}
-        >
+        <TextInput
+          withAsterisk
+          label="Title"
+          placeholder="title"
+          key={form.key("title")}
+          {...form.getInputProps("title")}
+        />
+        <TextInput
+          withAsterisk
+          label="Text"
+          placeholder="text"
+          key={form.key("text")}
+          {...form.getInputProps("text")}
+        />
+        <Button type="submit" size="md" loading={createNoteMutation.isPending}>
           Post
         </Button>
       </Container>
@@ -62,4 +66,4 @@ const AddNoteDialog = ({ open, setOpen }: AddNoteDialogProps) => {
   );
 };
 
-export default AddNoteDialog;
+export default CreateNoteForm;

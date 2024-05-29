@@ -3,10 +3,17 @@
 import { useChat } from "ai/react";
 
 export default function VercelAiChat() {
-  const { messages, input, handleInputChange, handleSubmit, data } = useChat();
+  const {
+    messages,
+    input,
+    handleInputChange,
+    handleSubmit,
+    setMessages,
+    isLoading,
+    error,
+  } = useChat();
   return (
     <div className="flex flex-col w-full max-w-md py-24 mx-auto stretch">
-      {data && <pre>{JSON.stringify(data, null, 2)}</pre>}
       {messages.map((m) => (
         <div key={m.id} className="whitespace-pre-wrap">
           {m.role === "user" ? "User: " : "AI: "}

@@ -3,15 +3,17 @@ import { Pinecone } from "@pinecone-database/pinecone";
 const apiKey = process.env.PINECONE_API_KEY;
 
 if (!apiKey) {
-  throw Error("PINECONE_API_KEY is not set");
+  throw new Error("PINECONE_API_KEY is not set");
 }
 
 const pinecone = new Pinecone({ apiKey });
 
-const chatBotIndex = async () => {
+const indexName = "ai-chat-bot";
+
+const createPineconeIndex = async () => {
   try {
     await pinecone.createIndex({
-      name: "ai-chat-bot",
+      name: indexName,
       dimension: 1536,
       metric: "cosine",
       spec: {
@@ -24,8 +26,10 @@ const chatBotIndex = async () => {
     console.log("Index created successfully.");
   } catch (error) {
     console.error("Error creating index:", error);
-    throw error;
   }
+
+  const chatBotIndex = pinecone.index(indexName);
+  return chatBotIndex;
 };
 
-export default chatBotIndex;
+export default createPineconeIndex;

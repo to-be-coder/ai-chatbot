@@ -13,6 +13,7 @@
     "@mantine/core": "^7.10.0",
     "@mantine/form": "^7.10.0",
     "@mantine/hooks": "^7.10.0",
+    "@pinecone-database/pinecone": "^2.2.1",
     "@prisma/client": "^5.14.0",
     "@tabler/icons": "^3.5.0",
     "@tabler/icons-react": "^3.5.0",

@@ -1,4 +1,4 @@
-import { prisma } from "../../../../lib/backend/prisma";
+import prisma from "../../../../lib/db/prisma";
 import { createNoteSchema } from "../../../../lib/validation/note";
 
 export async function POST(req: Request) {
@@ -20,6 +20,8 @@ export async function POST(req: Request) {
         text,
       },
     });
+
+    return Response.json({ note }, { status: 201 });
   } catch (error) {
     console.error(error);
     return Response.json({ error: "Internal server error" }, { status: 500 });

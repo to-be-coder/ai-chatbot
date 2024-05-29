@@ -1,16 +1,17 @@
-import { Box, Button, Container, SimpleGrid, Stack } from "@mantine/core";
-
+import { Box, Button, Container } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/router";
-import { z } from "zod";
 import { api } from "../../lib/frontend/api";
+import { createNoteSchema } from "../../lib/validation/note";
 
-const AddNoteDialog = () => {
-  const verifySchema = z.object({
-    title: z.string().min(1, { message: "title is required" }),
-    text: z.string().min(1, { message: "text is required" }),
-  });
+interface AddNoteDialogProps {
+  open: boolean;
+  setOpen: (open: boolean) => void;
+}
+
+const AddNoteDialog = ({ open, setOpen }: AddNoteDialogProps) => {
+  const verifySchema = createNoteSchema;
   const validate = zodResolver(verifySchema);
 
   const form = useForm({
@@ -49,17 +50,13 @@ const AddNoteDialog = () => {
   return (
     <Box component="form" onSubmit={form.onSubmit(handleSubmit)}>
       <Container size="xl">
-        <Stack>
-          <SimpleGrid cols={2}>
-            <Button
-              type="submit"
-              size="md"
-              loading={createProjectUpdateMutation.isPending}
-            >
-              Post
-            </Button>
-          </SimpleGrid>
-        </Stack>
+        <Button
+          type="submit"
+          size="md"
+          loading={createProjectUpdateMutation.isPending}
+        >
+          Post
+        </Button>
       </Container>
     </Box>
   );

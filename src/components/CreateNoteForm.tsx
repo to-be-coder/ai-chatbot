@@ -1,46 +1,13 @@
 "use client";
 
 import { Box, Button, Container, TextInput } from "@mantine/core";
-import { useForm, zodResolver } from "@mantine/form";
-import { useMutation } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
-import { api } from "../../lib/frontend/api";
-import { createNoteSchema } from "../../lib/validation/note";
 
-const CreateNoteForm = () => {
-  const verifySchema = createNoteSchema;
-  const validate = zodResolver(verifySchema);
-
-  const form = useForm({
-    validate: function (values: any) {
-      const transformedValues = values;
-      return validate(transformedValues);
-    },
-    initialValues: {
-      title: null,
-      text: null,
-    },
-  });
-
-  const router = useRouter();
-
-  const createNoteMutation = useMutation({
-    mutationKey: ["create-note"],
-    mutationFn: (data) => {
-      return api
-        .post("/api/notes", data)
-        .then((response: any) => response.data);
-    },
-  });
-
-  const handleSubmit = async (data: any) => {
-    const { ok, result, error } = await createNoteMutation.mutateAsync(data);
-    if (ok) {
-    } else {
-      alert(error);
-    }
-  };
-
+type NoteFormProps = {
+  form: any;
+  handleSubmit: any;
+  mutation: any;
+};
+const NoteForm = ({ form, handleSubmit, mutation }: NoteFormProps) => {
   return (
     <Box component="form" onSubmit={form.onSubmit(handleSubmit)}>
       <Container size="xl">
@@ -58,7 +25,7 @@ const CreateNoteForm = () => {
           key={form.key("text")}
           {...form.getInputProps("text")}
         />
-        <Button type="submit" size="md" loading={createNoteMutation.isPending}>
+        <Button type="submit" size="md" loading={mutation.isPending}>
           Post
         </Button>
       </Container>
@@ -66,4 +33,4 @@ const CreateNoteForm = () => {
   );
 };
 
-export default CreateNoteForm;
+export default NoteForm;

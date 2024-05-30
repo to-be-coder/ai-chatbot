@@ -16,7 +16,3 @@ export const updateNoteSchema = z.object({
 export const getNoteSchema = z.object({
   id: z.string().min(1),
 });
-
-export const deleteNoteSchema = z.object({
-  id: z.string().min(1),
-});

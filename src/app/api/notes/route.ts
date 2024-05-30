@@ -50,7 +50,7 @@ export async function POST(req: Request) {
     return Response.json({ error: "Internal server error" }, { status: 500 });
   }
 }
-export async function PUT(req: Request) {
+export async function PATCH(req: Request) {
   try {
     const body = await req.json();
 

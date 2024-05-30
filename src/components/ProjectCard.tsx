@@ -1,16 +1,18 @@
 import { Card, Stack, Text, Title, rem } from "@mantine/core";
+import Link from "next/link";
 
 type Props = {
   title: string;
   text: string;
+  link: string;
 };
 
-export default function ProjectCard({ title, text }: Props) {
+export default function ProjectCard({ title, text, link }: Props) {
   return (
     <Card
-      // component={Link}
-      // href={link || ''}
-      // target={target}
+      component={Link}
+      href={link || ""}
+      target="_blank"
       radius="md"
       shadow="xl"
       w={{

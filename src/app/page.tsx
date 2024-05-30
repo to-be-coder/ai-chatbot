@@ -13,7 +13,6 @@ export default async function Home() {
           <ProjectCard title={note.title} text={note.text} />
         ))}
       </SimpleGrid>
-      \
     </>
   );
 }

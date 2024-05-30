@@ -12,3 +12,11 @@ export const updateNoteSchema = z.object({
   title: z.string().min(1, { message: "title is required" }),
   text: z.string().min(1, { message: "title is required" }),
 });
+
+export const getNoteSchema = z.object({
+  id: z.string().min(1),
+});
+
+export const deleteNoteSchema = z.object({
+  id: z.string().min(1),
+});

@@ -1,26 +1,20 @@
+"use client";
+
 import NoteForm from "@/components/CreateNoteForm";
 import { useForm, zodResolver } from "@mantine/form";
 import { useMutation } from "@tanstack/react-query";
-import { useRouter } from "next/router";
 import { api } from "../../../lib/frontend/api";
 import { createNoteSchema } from "../../../lib/validation/note";
 
-export default async function AddNotePage() {
-  const verifySchema = createNoteSchema;
-  const validate = zodResolver(verifySchema);
-
+export default function AddNotePage() {
   const form = useForm({
-    validate: function (values: any) {
-      const transformedValues = values;
-      return validate(transformedValues);
-    },
+    mode: "uncontrolled",
+    validate: zodResolver(createNoteSchema),
     initialValues: {
       title: null,
       text: null,
     },
   });
-
-  const router = useRouter();
 
   const createNoteMutation = useMutation({
     mutationKey: ["create-note"],

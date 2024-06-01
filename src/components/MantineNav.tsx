@@ -72,7 +72,7 @@ export function MantineNav() {
         <Image
           src="/favicon.ico"
           h={{ base: rem(35), md: rem(35) }}
-          alt="Limelight"
+          alt="AI Chat"
         />
       </Center>
 

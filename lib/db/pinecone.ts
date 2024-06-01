@@ -10,28 +10,28 @@ const pinecone = new Pinecone({ apiKey });
 
 const indexName = "ai-chat-bot";
 
-const createPineconeIndex = async () => {
-  try {
-    await pinecone.createIndex({
-      name: indexName,
-      dimension: 1536,
-      metric: "cosine",
-      spec: {
-        serverless: {
-          cloud: "aws",
-          region: "us-east-1",
-        },
-      },
-    });
-    console.log("Index created successfully.");
-  } catch (error) {
-    console.error("Error creating index:", error);
-  }
-};
+// const createPineconeIndex = async () => {
+//   try {
+//     await pinecone.createIndex({
+//       name: indexName,
+//       dimension: 1536,
+//       metric: "cosine",
+//       spec: {
+//         serverless: {
+//           cloud: "aws",
+//           region: "us-east-1",
+//         },
+//       },
+//     });
+//     console.log("Index created successfully.");
+//   } catch (error) {
+//     console.error("Error creating index:", error);
+//   }
+// };
 
-(async () => {
-  await createPineconeIndex();
-})();
+// (async () => {
+//   await createPineconeIndex();
+// })();
 
 const chatBotIndex = pinecone.index(indexName);
 

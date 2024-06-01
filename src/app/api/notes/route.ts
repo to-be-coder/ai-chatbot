@@ -7,6 +7,17 @@ import {
   updateNoteSchema,
 } from "../../../../lib/validation/note";
 
+export async function GET() {
+  try {
+    const allNotes = await prisma.note.findMany();
+
+    return Response.json({ allNotes }, { status: 201 });
+  } catch (error) {
+    console.error(error);
+    return Response.json({ error: "Internal server error" }, { status: 500 });
+  }
+}
+
 export async function POST(req: Request) {
   try {
     const body = await req.json();

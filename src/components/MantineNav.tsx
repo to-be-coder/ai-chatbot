@@ -9,17 +9,8 @@ import {
   rem,
 } from "@mantine/core";
 
-import {
-  IconCalendarStats,
-  IconDeviceDesktopAnalytics,
-  IconFingerprint,
-  IconGauge,
-  IconHome2,
-  IconLogout,
-  IconSettings,
-  IconSwitchHorizontal,
-  IconUser,
-} from "@tabler/icons-react";
+import { IconFilePlus, IconHome2, IconTestPipe } from "@tabler/icons-react";
+import Link from "next/link";
 import { useState } from "react";
 import classes from "./MantineNav.module.css";
 
@@ -27,16 +18,25 @@ interface NavbarLinkProps {
   icon: typeof IconHome2;
   label: string;
   active?: boolean;
+  url: string;
   onClick?(): void;
 }
 
-function NavbarLink({ icon: Icon, label, active, onClick }: NavbarLinkProps) {
+function NavbarLink({
+  icon: Icon,
+  label,
+  url,
+  active,
+  onClick,
+}: NavbarLinkProps) {
   return (
     <Tooltip label={label} position="right" transitionProps={{ duration: 0 }}>
       <UnstyledButton
         onClick={onClick}
         className={classes.link}
         data-active={active || undefined}
+        component={Link}
+        href={url}
       >
         <Icon style={{ width: rem(20), height: rem(20) }} stroke={1.5} />
       </UnstyledButton>
@@ -45,13 +45,10 @@ function NavbarLink({ icon: Icon, label, active, onClick }: NavbarLinkProps) {
 }
 
 const mockdata = [
-  { icon: IconHome2, label: "Home" },
-  { icon: IconGauge, label: "Dashboard" },
-  { icon: IconDeviceDesktopAnalytics, label: "Analytics" },
-  { icon: IconCalendarStats, label: "Releases" },
-  { icon: IconUser, label: "Account" },
-  { icon: IconFingerprint, label: "Security" },
-  { icon: IconSettings, label: "Settings" },
+  { icon: IconHome2, label: "Home", url: "/" },
+  { icon: IconFilePlus, label: "Add Note", url: "/add-note" },
+  { icon: IconTestPipe, label: "Test", url: "/test" },
+  // { icon: IconCalendarStats, label: "Releases", url: "/add-note" },
 ];
 
 export function MantineNav() {
@@ -72,7 +69,7 @@ export function MantineNav() {
         <Image
           src="/favicon.ico"
           h={{ base: rem(35), md: rem(35) }}
-          alt="AI Chat"
+          alt="AI Chat Bot"
         />
       </Center>
 
@@ -82,10 +79,10 @@ export function MantineNav() {
         </Stack>
       </div>
 
-      <Stack justify="center" gap={0}>
+      {/* <Stack justify="center" gap={0}>
         <NavbarLink icon={IconSwitchHorizontal} label="Change account" />
         <NavbarLink icon={IconLogout} label="Logout" />
-      </Stack>
+      </Stack> */}
     </nav>
   );
 }

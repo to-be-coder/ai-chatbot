@@ -9,7 +9,7 @@ import {
   rem,
 } from "@mantine/core";
 
-import { IconFilePlus, IconHome2, IconTestPipe } from "@tabler/icons-react";
+import { IconFilePlus, IconHome2 } from "@tabler/icons-react";
 import Link from "next/link";
 import { useState } from "react";
 import classes from "./MantineNav.module.css";
@@ -47,7 +47,7 @@ function NavbarLink({
 const mockdata = [
   { icon: IconHome2, label: "Home", url: "/" },
   { icon: IconFilePlus, label: "Add Note", url: "/add-note" },
-  { icon: IconTestPipe, label: "Test", url: "/test" },
+  // { icon: IconTestPipe, label: "Test", url: "/test" },
   // { icon: IconCalendarStats, label: "Releases", url: "/add-note" },
 ];
 

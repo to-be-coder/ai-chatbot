@@ -3,7 +3,7 @@ import prisma from "../../../../lib/db/prisma";
 import { getEmbedding } from "../../../../lib/openai";
 import {
   createNoteSchema,
-  deleteNoteSchema,
+  getNoteSchema,
   updateNoteSchema,
 } from "../../../../lib/validation/note";
 
@@ -116,7 +116,7 @@ export async function Delete(req: Request) {
   try {
     const body = await req.json();
 
-    const parseResult = deleteNoteSchema.safeParse(body);
+    const parseResult = getNoteSchema.safeParse(body);
 
     if (!parseResult.success) {
       console.error(parseResult.error);

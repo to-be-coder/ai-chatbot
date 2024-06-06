@@ -38,7 +38,7 @@ function NavbarLink({
         component={Link}
         href={url}
       >
-        <Icon style={{ width: rem(20), height: rem(20) }} stroke={1.5} />
+        <Icon style={{ width: rem(45), height: rem(45) }} stroke={1.5} />
       </UnstyledButton>
     </Tooltip>
   );
@@ -70,6 +70,7 @@ export function MantineNav() {
           src="/favicon.ico"
           h={{ base: rem(35), md: rem(35) }}
           alt="AI Chat Bot"
+          mb="xl"
         />
       </Center>
 

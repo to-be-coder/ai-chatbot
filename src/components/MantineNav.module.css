@@ -1,5 +1,6 @@
 .navbar {
   width: rem(80px);
+  height: 100vh;
   padding: var(--mantine-spacing-md);
   display: flex;
   flex-direction: column;
@@ -13,8 +14,8 @@
 }
 
 .link {
-  width: rem(50px);
-  height: rem(50px);
+  width: rem(100px);
+  height: rem(100px);
   border-radius: var(--mantine-radius-md);
   display: flex;
   align-items: center;
